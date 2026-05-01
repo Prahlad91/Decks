@@ -20,7 +20,7 @@ Open the live link in any modern browser. For best experience, press `F11` (Wind
 |---|---|
 | Next slide | `→`, `Space`, `Page Down`, or click |
 | Previous slide | `←` or `Page Up` |
-| Jump to slide | `1`–`9` |
+| Jump to slide | `1`–9 |
 | First slide | `Home` |
 | Last slide | `End` |
 | Mobile | Swipe left / right |
