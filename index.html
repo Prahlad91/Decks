@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prahlad Madhukar — Decks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --ink: #f5f5f3;
+    --ink-mid: rgba(245,245,243,0.65);
+    --ink-faint: rgba(245,245,243,0.35);
+    --line: rgba(245,245,243,0.10);
+    --red: #fa0f00;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    background:
+      radial-gradient(ellipse at 15% 25%, rgba(250,15,0,0.08), transparent 50%),
+      radial-gradient(ellipse at 85% 75%, rgba(250,15,0,0.04), transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 10vh 6vw 12vh;
+  }
+  .mark {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin-bottom: 48px;
+  }
+  .mark::before, .mark::after {
+    content: "";
+    position: absolute;
+    background: var(--red);
+  }
+  .mark::before { width: 40px; height: 2px; top: 19px; left: 0; }
+  .mark::after  { width: 2px; height: 40px; left: 19px; top: 0; }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    font-variation-settings: "opsz" 96;
+  }
+  h1 em { font-style: italic; color: var(--red); }
+  .sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    max-width: 520px;
+    margin-bottom: 72px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin-bottom: 48px;
+  }
+  .decks-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 24px;
+  }
+  .deck-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .deck-list li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 32px;
+    background: #0e0e0e;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 350ms var(--ease), border-color 350ms var(--ease);
+    gap: 24px;
+  }
+  .deck-list li a:hover {
+    background: #141414;
+    border-color: rgba(245,245,243,0.18);
+  }
+  .deck-list li a:hover .arrow { transform: translateX(4px); }
+  .deck-info .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .deck-info h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 32px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    font-variation-settings: "opsz" 48;
+  }
+  .deck-info p {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.5;
+    max-width: 480px;
+  }
+  .deck-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .arrow {
+    color: var(--red);
+    font-size: 20px;
+    transition: transform 350ms var(--ease);
+    font-family: 'Fraunces', serif;
+  }
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="mark"></div>
+  <div class="eyebrow">Prahlad Madhukar</div>
+  <h1>Platform<br>briefs <em>&</em><br>decks.</h1>
+  <p class="sub">A collection of presentations on product strategy, platform thinking, and AI-native engineering at Adobe.</p>
+  <hr class="divider">
+  <div class="decks-label">Published decks</div>
+  <ul class="deck-list">
+    <li>
+      <a href="./ums-ai-native-deck/">
+        <div class="deck-info">
+          <div class="num">01</div>
+          <h2>Unified Metering Service</h2>
+          <p>Powering Adobe's AI economy — and building the platform AI-native. 10 slides.</p>
+        </div>
+        <div class="deck-meta">
+          <span class="badge">Platform brief · 2026</span>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <footer>Crafted in claude.ai &nbsp;&middot;&nbsp; prahlad91.github.io/Decks</footer>
+</div>
+</body>
+</html>
